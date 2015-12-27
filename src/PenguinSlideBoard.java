@@ -215,7 +215,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 	/**
 	 * Checks if there is a possible move on the board
 	 * 
-	 * @return where there are any possible moves or not
+	 * @return true if there are possible moves and false otherwise
 	 */
 	public boolean checkForPossibleMoves()
 
