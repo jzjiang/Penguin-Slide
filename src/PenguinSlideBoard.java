@@ -180,7 +180,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 		removeExisting();
 
 		// If there aren't any possible moves, re-shuffle the board
-		while (checkForPossibleMoves() == false)
+		while (!checkForPossibleMoves())
 		{
 			noMoreMoves = true;
 			paintImmediately(0, 0, getWidth(), getHeight());
@@ -833,7 +833,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 		}
 
 		// If there aren't any possible moves, re-shuffle the board
-		while (checkForPossibleMoves() == false)
+		while (!checkForPossibleMoves())
 		{
 			noMoreMoves = true;
 			paintImmediately(0, 0, getWidth(), getHeight());
@@ -1251,7 +1251,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 		super.paintComponent(g);
 
 		// Draw the main menu if the user is not in game
-		if (inGame == false)
+		if (!inGame)
 			g.drawImage(mainMenu, 0, 0, this);
 
 		// If the user is in game
@@ -1306,10 +1306,10 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			g.drawImage(thermometerLines, 25, 670, this);
 
 			// Draw losing screen if user loses
-			if (gameOver == true)
+			if (gameOver )
 			{
 				// If there is a new high score, draw the high score screen
-				if (newHighScore == true)
+				if (newHighScore )
 					g.drawImage(loseHighScore, 262, 259, this);
 
 				// Otherwise, draw the regular high score screen
@@ -1318,11 +1318,11 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 
 				// If the user has submitted their high score, draw the high
 				// score submitted screen
-				if (highScoreSubmit == true)
+				if (highScoreSubmit )
 					g.drawImage(loseHighScoreSubmit, 262, 259, this);
 
 				// If the user click view high score
-				if (showHighScore == true)
+				if (showHighScore )
 				{
 					g.drawImage(highScoreImage, 262, 259, this);
 					g.setColor(Color.BLACK);
@@ -1332,7 +1332,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 					g.drawImage(backMenuButton, 294, 430, this);
 				}
 
-				if (showHighScore == false)
+				if (!showHighScore)
 				{
 					g.drawImage(newGameButton, 282, 423, this);
 					g.drawImage(viewHighScore, 500, 423, this);
@@ -1340,15 +1340,15 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			}
 
 			// Draw the no more moves text if there aren't any possible moves
-			if (noMoreMoves == true)
+			if (noMoreMoves )
 				g.drawImage(noMoreMovesImage, 428, 319, this);
 
 			// Draw the level up text if the user levels up
-			if (levelUp == true)
+			if (levelUp )
 				g.drawImage(levelUpImage, 428, 319, this);
 
 			// Draw the game menu
-			if (inGameMenuScreen == true)
+			if (inGameMenuScreen )
 			{
 				g.drawImage(inGameMenu, 262, 134, this);
 				g.drawImage(resumeButton, 396, 302, this);
@@ -1395,7 +1395,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 		Point pressedPoint = event.getPoint();
 
 		// If the user is not in a game
-		if (inGame == false)
+		if (!inGame)
 		{
 			if (instructionsScreen == 0)
 			{
@@ -1472,7 +1472,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 		{
 
 			// If the menu is not open
-			if (inGameMenuScreen == false)
+			if (!inGameMenuScreen)
 			{
 				// Respond if a mouse button was pressed over the Menu image
 				if (pressedPoint.x >= 100 && pressedPoint.x < 250
@@ -1523,7 +1523,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			}
 
 			// If the menu is open
-			else if (inGameMenuScreen == true)
+			else if (inGameMenuScreen)
 			{
 				// Respond if the menu is open and the user clicks resume
 				if (pressedPoint.x >= 396 && pressedPoint.x < 604
@@ -1615,7 +1615,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			}
 
 			// Convert mouse-pressed location to board row and column
-			if (inGameMenuScreen == false && gameOver == false
+			if (!inGameMenuScreen && !gameOver
 					&& instructionsScreen == 0 && pressedPoint.x >= 350
 					&& pressedPoint.x < 990 && pressedPoint.y >= 54
 					&& pressedPoint.y < 694)
@@ -1635,14 +1635,14 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			}
 
 			// Respond if the game is over
-			if (gameOver == true)
+			if (gameOver)
 			{
 				// Respond if the user clicks new game
-				if (showHighScore == false && pressedPoint.x >= 282
+				if (!showHighScore && pressedPoint.x >= 282
 						&& pressedPoint.x < 490 && pressedPoint.y >= 423
 						&& pressedPoint.y < 489)
 				{
-					if (newHighScore == true)
+					if (newHighScore )
 						remove(nameBox);
 					highScoreSubmit = false;
 					newGame();
@@ -1652,22 +1652,22 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 				else if (pressedPoint.x >= 500 && pressedPoint.x < 708
 						&& pressedPoint.y >= 423 && pressedPoint.y < 489)
 				{
-					if (newHighScore == true)
+					if (newHighScore )
 						remove(nameBox);
 					showHighScore = true;
 				}
-				else if (showHighScore == true && pressedPoint.x >= 294
+				else if (showHighScore  && pressedPoint.x >= 294
 						&& pressedPoint.x < 475 && pressedPoint.y >= 430
 						&& pressedPoint.y < 488)
 				{
-					if (newHighScore == true)
+					if (newHighScore )
 						add(nameBox);
 					showHighScore = false;
 				}
 
 				// Respond if the user has a new high score and clicks the enter
 				// button
-				else if (newHighScore == true && pressedPoint.x >= 698
+				else if (newHighScore  && pressedPoint.x >= 698
 						&& pressedPoint.x < 741 && pressedPoint.y >= 299
 						&& pressedPoint.y < 335)
 				{
