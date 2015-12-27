@@ -17,7 +17,7 @@ public class PenguinSlideMain extends JFrame
 		setResizable(false);
 
 		// Load up the icon image (penguin image from www.iconshock.com)
-		setIconImage(Toolkit.getDefaultToolkit().getImage("blackPenguin.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\penguin1.png"));
 
 		// Sets up the Connect Four board that plays most of the game
 		// and add it to the centre of this frame

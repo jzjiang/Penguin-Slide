@@ -30,6 +30,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 	private final int NO_OF_COLUMNS = 8;
 	private final int SQUARE_SIZE = 80;
 	private final double THERMOMETER_BASE_SCORE = 2500;
+	private final Image penguins[] = new Image[7];
 
 	// Program variables
 	private int fromRow, fromColumn, toRow, toColumn;
@@ -39,7 +40,6 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			backButton, thermometer, thermometerLines, lose, loseHighScore,
 			loseHighScoreSubmit, viewHighScore, highScoreImage, about, title,
 			scoreImage, levelImage, levelUpImage, noMoreMovesImage, hintButton;
-	private Image penguins[] = new Image[7];
 	private int[][] board;
 	private int selectedPiece, switchedPiece, shiftRow, shiftColumn,
 			draggedXPos, draggedYPos;
@@ -59,8 +59,8 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 	private TextField nameBox;
 
 	// imageBackground from www.stockfreeimages.com
-	Image imageBackground = new ImageIcon("background.jpg").getImage();
-	Image boardBackground = new ImageIcon("Ice.png").getImage();
+	Image imageBackground = new ImageIcon("images\\background.jpg").getImage();
+	Image boardBackground = new ImageIcon("images\\Ice.png").getImage();
 	int imageHeight = imageBackground.getHeight(PenguinSlideBoard.this);
 	int imageWidth = imageBackground.getWidth(PenguinSlideBoard.this);
 
@@ -79,7 +79,6 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 		board = new int[NO_OF_ROWS + 2][NO_OF_COLUMNS + 2];
 
 		loadResources();
-		backgroundMusic.loop();
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		setFont(new Font("Arial", Font.BOLD, 45));
@@ -101,52 +100,56 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 	 */
 	private void loadResources()
 	{
-		// Store the image for each piece in an array.
-		penguins[1] = new ImageIcon("blackPenguin.png").getImage();
-		penguins[2] = new ImageIcon("redPenguin.png").getImage();
-		penguins[3] = new ImageIcon("pinkPenguin.png").getImage();
-		penguins[4] = new ImageIcon("bluePenguin.png").getImage();
-		penguins[5] = new ImageIcon("greenPenguin.png").getImage();
-		penguins[6] = new ImageIcon("yellowPenguin.png").getImage();
+		// Initialize penguins
+		for (int i = 1; i < penguins.length; i++)
+		{
+			penguins[i] = new ImageIcon("images\\penguin" + i + ".png")
+					.getImage();
+		}
 
 		// Load up other images
-		pop = new ImageIcon("pop.png").getImage();
-		penguinLogo = new ImageIcon("penguinLogo.png").getImage();
-		menuButton = new ImageIcon("menuButton.png").getImage();
-		inGameMenu = new ImageIcon("inGameMenu.png").getImage();
-		resumeButton = new ImageIcon("resumeButton.png").getImage();
-		newGameButton = new ImageIcon("newGameButton.png").getImage();
-		instructionsButton = new ImageIcon("instructionsButton.png").getImage();
-		instructionsOne = new ImageIcon("instructionsOne.png").getImage();
-		instructionsTwo = new ImageIcon("instructionsTwo.png").getImage();
-		instructionsThree = new ImageIcon("instructionsThree.png").getImage();
-		backMenuButton = new ImageIcon("backMenuButton.png").getImage();
-		nextButton = new ImageIcon("nextButton.png").getImage();
-		backButton = new ImageIcon("backButton.png").getImage();
-		mainMenu = new ImageIcon("mainMenu.png").getImage();
-		thermometer = new ImageIcon("thermometer.png").getImage();
-		thermometerLines = new ImageIcon("thermometerLines.png").getImage();
-		lose = new ImageIcon("lose.png").getImage();
-		loseHighScore = new ImageIcon("loseHighScore.png").getImage();
-		loseHighScoreSubmit = new ImageIcon("loseHighScoreSubmit.png")
+		pop = new ImageIcon("images\\pop.png").getImage();
+		penguinLogo = new ImageIcon("images\\penguinLogo.png").getImage();
+		menuButton = new ImageIcon("images\\menuButton.png").getImage();
+		inGameMenu = new ImageIcon("images\\inGameMenu.png").getImage();
+		resumeButton = new ImageIcon("images\\resumeButton.png").getImage();
+		newGameButton = new ImageIcon("images\\newGameButton.png").getImage();
+		instructionsButton = new ImageIcon("images\\instructionsButton.png")
 				.getImage();
-		about = new ImageIcon("about.png").getImage();
-		title = new ImageIcon("title.png").getImage();
-		levelImage = new ImageIcon("level.png").getImage();
-		scoreImage = new ImageIcon("score.png").getImage();
-		levelUpImage = new ImageIcon("levelUp.png").getImage();
-		viewHighScore = new ImageIcon("viewHighScore.png").getImage();
-		highScoreImage = new ImageIcon("highScore.png").getImage();
-		noMoreMovesImage = new ImageIcon("noMoreMoves.png").getImage();
-		hintButton = new ImageIcon("hintButton.png").getImage();
+		instructionsOne = new ImageIcon("images\\instructionsOne.png")
+				.getImage();
+		instructionsTwo = new ImageIcon("images\\instructionsTwo.png")
+				.getImage();
+		instructionsThree = new ImageIcon("images\\instructionsThree.png")
+				.getImage();
+		backMenuButton = new ImageIcon("images\\backMenuButton.png").getImage();
+		nextButton = new ImageIcon("images\\nextButton.png").getImage();
+		backButton = new ImageIcon("images\\backButton.png").getImage();
+		mainMenu = new ImageIcon("images\\mainMenu.png").getImage();
+		thermometer = new ImageIcon("images\\thermometer.png").getImage();
+		thermometerLines = new ImageIcon("images\\thermometerLines.png")
+				.getImage();
+		lose = new ImageIcon("images\\lose.png").getImage();
+		loseHighScore = new ImageIcon("images\\loseHighScore.png").getImage();
+		loseHighScoreSubmit = new ImageIcon("images\\loseHighScoreSubmit.png")
+				.getImage();
+		about = new ImageIcon("images\\about.png").getImage();
+		title = new ImageIcon("images\\title.png").getImage();
+		levelImage = new ImageIcon("images\\level.png").getImage();
+		scoreImage = new ImageIcon("images\\score.png").getImage();
+		levelUpImage = new ImageIcon("images\\levelUp.png").getImage();
+		viewHighScore = new ImageIcon("images\\viewHighScore.png").getImage();
+		highScoreImage = new ImageIcon("images\\highScore.png").getImage();
+		noMoreMovesImage = new ImageIcon("images\\noMoreMoves.png").getImage();
+		hintButton = new ImageIcon("images\\hintButton.png").getImage();
 
 		// Load audio files - files from Youtube's Free Music library and
 		// freesound.org
 		backgroundMusic = Applet
-				.newAudioClip(getCompleteURL("backgroundMusic.wav"));
-		splashSound = Applet.newAudioClip(getCompleteURL("splash.wav"));
-		loseSound = Applet.newAudioClip(getCompleteURL("lose.wav"));
-		levelUpSound = Applet.newAudioClip(getCompleteURL("levelUp.wav"));
+				.newAudioClip(getCompleteURL("audio\\backgroundMusic.wav"));
+		splashSound = Applet.newAudioClip(getCompleteURL("audio\\splash.wav"));
+		loseSound = Applet.newAudioClip(getCompleteURL("audio\\lose.wav"));
+		levelUpSound = Applet.newAudioClip(getCompleteURL("audio\\levelUp.wav"));
 	}
 
 	/**
@@ -353,7 +356,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 						// Adjust the thermometer accordingly
 						thermometerStart += changeValue;
 						thermometerSize -= changeValue;
-						
+
 						// Start the timer
 						timerOn = true;
 						timer.start();
@@ -397,7 +400,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 						// Adjust the thermometer accordingly
 						thermometerStart += changeValue;
 						thermometerSize -= changeValue;
-						
+
 						// Start the timer
 						timerOn = true;
 						timer.start();
@@ -441,7 +444,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 						// Adjust the thermometer accordingly
 						thermometerStart += changeValue;
 						thermometerSize -= changeValue;
-						
+
 						// Start the timer
 						timerOn = true;
 						timer.start();
@@ -480,7 +483,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 						// Stop the timer
 						timer.stop();
 						timerOn = false;
-						
+
 						// Remove any existing 3 or more in a rows
 						removeExisting();
 					}
@@ -751,7 +754,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 
 				// Reset the timer to 0 after a move is made
 				time = 0;
-				
+
 				// Start the timer
 				timerOn = true;
 				timer.start();
@@ -805,7 +808,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 
 				// Reset to 0 after a move is made
 				time = 0;
-				
+
 				// Start the timer
 				timerOn = true;
 				timer.start();
@@ -871,7 +874,7 @@ public class PenguinSlideBoard extends JPanel implements MouseListener,
 			// Stop the timer
 			timer.stop();
 			timerOn = false;
-			
+
 			// Remove any existing 3 or more in a rows
 			removeExisting();
 		}
